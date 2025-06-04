@@ -1,48 +1,83 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Welcome to Client Portal</title>
-    <style>
-      body {
-        font-family: sans-serif;
-        padding: 2rem;
-      }
-    </style>
-    <script>
-      window.dxe = { server: "https://us-central.dx.dialpad.com" };
-    </script>
-    <script async type="module" src="https://us-central.dx.dialpad.com/dxclient/dist/dialpad-chatbot.es.js"></script>
-  </head>
-  <body>
-    <h2>Welcome, <span id="userName">Client</span>!</h2>
-    <p>Email: <span id="userEmail"></span><br>Office ID: <span id="userOID"></span></p>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Portal</title>
+  <style>
+    :root {
+      --primary: #456BF7;
+      --secondary: #E4E6EF;
+      --success: #1FDE9C;
+      --info: #8950FC;
+      --warning: #FECA35;
+      --danger: #FA375E;
+      --light: #f0f3ff;
+      --dark: #181C32;
+      --white: #ffffff;
+      --gray: #7E8299;
+      --gray-dark: #3F4254;
+      --font-family-sans-serif: 'Poppins', Helvetica, sans-serif;
+    }
 
-    <div
-      id="dx_chatbot_fab_wrapper_id"
-      style="background-color:#6c1396; border-radius:50%; box-sizing: border-box; display: flex; height:56px; overflow:hidden; padding:12px; width:56px; position: fixed; bottom: 16px; right: 16px; z-index: 123;"
-    >
-      <img
-        data-dxchannelid="bda2a68bb340432b98fcf502a734dec2"
-        data-dxprovemail=""
-        id="dx_chatbot_fab_id"
-        src="https://us-central.dx.dialpad.com/kpd-static/providers/83087440/webchat/bda2a68bb340432b98fcf502a734dec2/images/fab-icon.png"
-        style="clip-path:circle(50%); object-fit: contain; height: auto; width: 100%;"
-      />
-    </div>
+    body {
+      margin: 0;
+      font-family: var(--font-family-sans-serif);
+      background-color: var(--light);
+      color: var(--gray-dark);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
 
-    <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const name = urlParams.get("name") || "Anonymous";
-      const email = urlParams.get("email") || "unknown@example.com";
-      const oid = urlParams.get("oid") || "UnknownOID";
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-      // Set welcome text
-      document.getElementById("userName").innerText = name;
-      document.getElementById("userEmail").innerText = email;
-      document.getElementById("userOID").innerText = oid;
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
 
-      // Inject client email into the chatbot button
-      document.getElementById("dx_chatbot_fab_id").setAttribute("data-dxprovemail", email);
-    </script>
-  </body>
+    main {
+      flex-grow: 1;
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome, <span id="clientName"></span></h1>
+  </header>
+  <main>
+    <p>You are now connected with our Client Success team. A representative will assist you shortly.</p>
+  </main>
+
+  <!-- Webchat Embed Code -->
+  <div
+    id="dx_chatbot_fab_wrapper_id"
+    style="background-color:#6c1396; border-radius:50%; box-sizing: border-box; display: flex; height:56px; overflow:hidden; padding:12px; width:56px; position: fixed; bottom: 16px; right: 16px; z-index: 123;">
+    <img 
+      data-dxchannelid="bda2a68bb340432b98fcf502a734dec2"
+      data-dxprovemail="5495351674880000@hrforhealth.com"
+      id="dx_chatbot_fab_id"
+      src="https://us-central.dx.dialpad.com/kpd-static/providers/83087440/webchat/bda2a68bb340432b98fcf502a734dec2/images/fab-icon.png"
+      style="clip-path:circle(50%); object-fit: contain; height: auto; width: 100%;"
+    />
+  </div>
+  <script>window.dxe = { "server": "https://us-central.dx.dialpad.com" };</script>
+  <script async type="module" src="https://us-central.dx.dialpad.com/dxclient/dist/dialpad-chatbot.es.js"></script>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get('name');
+    document.getElementById('clientName').textContent = name || 'Client';
+  </script>
+</body>
 </html>
