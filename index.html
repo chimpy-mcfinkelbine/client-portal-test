@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Client Portal Test</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to the Client Portal</h1>
+  <p>This is a test page simulating a logged-in client view.</p>
+
+  <div
+    id="dx_chatbot_fab_wrapper_id"
+    style="background-color:#6c1396; border-radius:50%; box-sizing: border-box; display: flex; height:56px; overflow:hidden; padding:12px; width:56px; position: fixed; bottom: 16px; right: 16px; z-index: 123;">
+    <img
+      data-dxchannelid="bda2a68bb340432b98fcf502a734dec2"
+      data-dxprovemail="5495351674880000@hrforhealth.com"
+      id="dx_chatbot_fab_id"
+      src="https://us-central.dx.dialpad.com/kpd-static/providers/83087440/webchat/bda2a68bb340432b98fcf502a734dec2/images/fab-icon.png"
+      style="clip-path:circle(50%); object-fit: contain; height: auto; width: 100%;" />
+  </div>
+
+  <script>
+    window.dxe = { "server": "https://us-central.dx.dialpad.com" };
+  </script>
+  <script async type="module" src="https://us-central.dx.dialpad.com/dxclient/dist/dialpad-chatbot.es.js"></script>
+</body>
+</html>
