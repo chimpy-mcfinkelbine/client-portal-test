@@ -1,76 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Client Resource Center</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Portal</title>
   <style>
+    :root {
+      --primary: #456BF7;
+      --secondary: #E4E6EF;
+      --success: #1FDE9C;
+      --info: #8950FC;
+      --warning: #FECA35;
+      --danger: #FA375E;
+      --light: #f0f3ff;
+      --dark: #181C32;
+      --white: #ffffff;
+      --gray: #7E8299;
+      --gray-dark: #3F4254;
+      --font-family-sans-serif: 'Poppins', Helvetica, sans-serif;
+    }
+
     body {
-      font-family: Poppins, Helvetica, sans-serif;
-      background-color: #f0f3ff;
       margin: 0;
-      padding: 0;
-      color: #3f4254;
-      text-align: center;
+      font-family: var(--font-family-sans-serif);
+      background-color: var(--light);
+      color: var(--gray-dark);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
     }
 
-    h2._pendo-resource-center-home-title-text {
-      color: #6a6c75;
-      font-size: 24px;
-      letter-spacing: 0;
-      line-height: 1.4;
-      padding: 24px 36px;
-      text-align: center;
-      font-weight: 400;
-      margin: 0;
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    #chat-container {
-      max-width: 900px;
-      margin: 2rem auto;
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    main {
+      flex-grow: 1;
       padding: 2rem;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    /* Prevent floating button */
-    #dx_chatbot_fab_wrapper_id {
-      display: none !important;
     }
   </style>
 </head>
 <body>
-  <h2 id="pendo-h2-981fbdb1" class="bb-text _pendo-resource-center-home-title-text">
-    Resource Center
-  </h2>
+  <header>
+    <h1>Welcome, <span id="clientName"></span></h1>
+  </header>
+  <main>
+    <p>You are now connected with our Client Success team. You can start a chat with us from the Resource Center at the lower right of your screen.</p>
+  </main>
 
-  <div id="chat-container">
-    <div id="dialpad-chat-embed"></div>
+  <!-- Webchat Embed Code -->
+  <div
+    id="dx_chatbot_fab_wrapper_id"
+    style="background-color:#6c1396; border-radius:50%; box-sizing: border-box; display: flex; height:56px; overflow:hidden; padding:12px; width:56px; position: fixed; bottom: 16px; right: 16px; z-index: 123;">
+    <img 
+      data-dxchannelid="bda2a68bb340432b98fcf502a734dec2"
+      data-dxprovemail="5495351674880000@hrforhealth.com"
+      id="dx_chatbot_fab_id"
+      src="https://us-central.dx.dialpad.com/kpd-static/providers/83087440/webchat/bda2a68bb340432b98fcf502a734dec2/images/fab-icon.png"
+      style="clip-path:circle(50%); object-fit: contain; height: auto; width: 100%;"
+    />
   </div>
+  <script>window.dxe = { "server": "https://us-central.dx.dialpad.com" };</script>
+  <script async type="module" src="https://us-central.dx.dialpad.com/dxclient/dist/dialpad-chatbot.es.js"></script>
 
   <script>
-    // Pass through user info from query string
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get("name");
-    const email = params.get("email");
-    const oid = params.get("oid");
-
-    // Set required globals before script loads
-    window.dxe = {
-      server: "https://us-central.dx.dialpad.com",
-      config: {
-        channelId: "bda2a68bb340432b98fcf502a734dec2", // your channel
-        providerEmail: "5495351674880000@hrforhealth.com", // your agent or routing email
-        metadata: {
-          name: name,
-          email: email,
-          oid: oid
-        },
-        layout: "embed", // Tells Dialpad to embed directly, not float
-        container: "#dialpad-chat-embed" // Your inline target
-      }
-    };
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get('name');
+    document.getElementById('clientName').textContent = name || 'Client';
   </script>
-
-  <script async type="module" src="https://us-central.dx.dialpad.com/dxclient/dist/dialpad-chatbot.es.js"></script>
 </body>
 </html>
