@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Client Portal Login</title>
+  <style>
+    body { font-family: Arial; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    form { padding: 2rem; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    input { display: block; margin: 1rem 0; width: 100%; padding: 0.5rem; }
+    button { padding: 0.5rem 1rem; background: #6c1396; color: white; border: none; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <form onsubmit="handleLogin(event)">
+    <h2>Client Login</h2>
+    <input type="text" id="name" placeholder="Full Name" required />
+    <input type="email" id="email" placeholder="Email Address" required />
+    <input type="text" id="oid" placeholder="Office ID or Password" required />
+    <button type="submit">Login</button>
+  </form>
+
+  <script>
+    function handleLogin(e) {
+      e.preventDefault();
+      const name = encodeURIComponent(document.getElementById("name").value);
+      const email = encodeURIComponent(document.getElementById("email").value);
+      const oid = encodeURIComponent(document.getElementById("oid").value);
+
+      // Redirect to your existing webchat.html page and pass the data
+      window.location.href = `webchat.html?name=${name}&email=${email}&oid=${oid}`;
+    }
+  </script>
+</body>
+</html>
