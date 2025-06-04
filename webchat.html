@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Client Support Portal</title>
+  <meta charset="UTF-8" />
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; }
+    #chat-container { position: relative; height: 80vh; }
+  </style>
+  <script>
+    // Parse query params from URL
+    function getParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        name: params.get("name") || "Anonymous",
+        email: params.get("email") || "unknown@example.com",
+        oid: params.get("oid") || "UnknownOID"
+      };
+    }
+
+    const user = getParams();
+
+    // Inject settings into Dialpad config
+    window.dxe = { server: "https://us-central.dx.dialpad.com" };
+
+    window.addEventListener("DOMContentLoaded", function () {
+      // Create the widget container
+      const img = document.createElement("img");
+      img.src = "https://us-central.dx.dialpad.com/kpd-static/providers/83087440/webchat/bda2a68bb340432b98fcf502a734dec2/images/fab-icon.png";
+      img.setAttribute("data-dxchannelid", "bda2a68bb340432b98fcf502a734dec2");
+      img.setAttribute("data-dxprovemail", user.email);
+      img.id = "dx_chatbot_fab_id";
+      img.style = "clip-path:circle(50%); object-fit: contain; height: auto; width: 100%;";
+
+      const wrapper = document.createElement("div");
+      wrapper.id = "dx_chatbot_fab_wrapper_id";
+      wrapper.style = "background-color:#7c0daf; border-radius:50%; box-sizing: border-box; display: flex; height:56px; overflow:hidden; padding:12px; width:56px; position: fixed; bottom: 16px; right: 16px; z-index: 123;";
+      wrapper.appendChild(img);
+      document.body.appendChild(wrapper);
+
+      // Inject the widget script
+      const script = document.createElement("script");
+      script.type = "module";
+      script.src = "https://us-central.dx.dialpad.com/dxclient/dist/dialpad-chatbot.es.js";
+      script.async = true;
+      document.body.appendChild(script);
+    });
+  </script>
+</head>
+<body>
+  <h2>Welcome, <span id="username"></span>!</h2>
+  <p>Your support session has started. You can begin chatting with our team using the purple button in the lower right corner.</p>
+
+  <script>
+    // Display name on screen
+    document.getElementById("username").innerText = decodeURIComponent(user.name);
+  </script>
+</body>
+</html>
